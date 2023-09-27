@@ -67,7 +67,7 @@ export async function listChartVOByPageUsingPOST(
   body: API.ChartQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageChart_>('/api/chart/list/page/vo', {
+  return request<API.BaseResponsePageChart_>('/api/chart/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

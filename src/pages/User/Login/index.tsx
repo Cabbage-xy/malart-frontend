@@ -1,25 +1,17 @@
 import Footer from '@/components/Footer';
 import { login } from '@/services/ant-design-pro/api';
-import { getFakeCaptcha } from '@/services/ant-design-pro/login';
-import { listChartVOByPageUsingPOST } from '@/services/malart/chartController';
 import {
   AlipayCircleOutlined,
   LockOutlined,
-  MobileOutlined,
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
-import {
-  LoginForm,
-  ProFormCaptcha,
-  ProFormCheckbox,
-  ProFormText,
-} from '@ant-design/pro-components';
+import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { Helmet, history, useModel } from '@umijs/max';
+import { Helmet, history, Link, useModel } from '@umijs/max';
 import { Alert, message, Tabs } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
 const ActionIcons = () => {
@@ -44,23 +36,7 @@ const ActionIcons = () => {
     </>
   );
 };
-const Lang = () => {
-  // eslint-disable-next-line
-  const langClassName = useEmotionCss(({ token }) => {
-    return {
-      width: 42,
-      height: 42,
-      lineHeight: '42px',
-      position: 'fixed',
-      right: 16,
-      borderRadius: token.borderRadius,
-      ':hover': {
-        backgroundColor: token.colorBgTextHover,
-      },
-    };
-  });
-  return;
-};
+
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => {
@@ -90,11 +66,11 @@ const Login: React.FC = () => {
       backgroundSize: '100% 100%',
     };
   });
-  useEffect(() => {
-    listChartVOByPageUsingPOST({}).then((res) => {
-      console.log(res);
-    });
-  });
+  // useEffect(() => {
+  //   listChartVOByPageUsingPOST({}).then((res) => {
+  //     console.log(res);
+  //   });
+  // });
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
@@ -138,7 +114,6 @@ const Login: React.FC = () => {
           {'登录'}- {Settings.title}
         </title>
       </Helmet>
-      <Lang />
       <div
         style={{
           flex: '1',
@@ -151,8 +126,8 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           logo={<img alt="logo" src="/logo.svg" />}
-          title="Ant Design"
-          subTitle={'Ant Design 是西湖区最具影响力的 Web 设计规范'}
+          title="malart"
+          subTitle={'malart - Your powerful talent BI'}
           initialValues={{
             autoLogin: true,
           }}
@@ -170,10 +145,10 @@ const Login: React.FC = () => {
                 key: 'account',
                 label: '账户密码登录',
               },
-              {
-                key: 'mobile',
-                label: '手机号登录',
-              },
+              // {
+              //   key: 'mobile',
+              //   label: '手机号登录',
+              // },
             ]}
           />
 
@@ -213,7 +188,7 @@ const Login: React.FC = () => {
             </>
           )}
 
-          {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
+          {/* {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
           {type === 'mobile' && (
             <>
               <ProFormText
@@ -267,22 +242,23 @@ const Login: React.FC = () => {
                 }}
               />
             </>
-          )}
+          )} */}
+
           <div
             style={{
               marginBottom: 24,
             }}
           >
-            <ProFormCheckbox noStyle name="autoLogin">
+            {/* <ProFormCheckbox noStyle name="autoLogin">
               自动登录
-            </ProFormCheckbox>
-            <a
-              style={{
-                float: 'right',
+            </ProFormCheckbox> */}
+            <Link
+              to={{
+                pathname: '/register',
               }}
             >
-              忘记密码 ?
-            </a>
+              注册
+            </Link>
           </div>
         </LoginForm>
       </div>

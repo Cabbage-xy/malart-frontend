@@ -64,7 +64,7 @@ export async function listPostVOByPageUsingPOST(
   body: API.PostQueryRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePagePostVO_>('/api/post/list/page/vo', {
+  return request<API.BaseResponsePagePostVO_>('/api/post/list/page', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
